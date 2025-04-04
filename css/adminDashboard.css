@@ -144,13 +144,48 @@ button {
 /* Main Content */
 .main-content {
     flex: 1;
-    margin-left: 240px;
-    padding: 24px;
-    transition: margin-left 0.3s;
+    margin-left: 16%; /* Match the sidebar width percentage */
+    padding: 20px;
+    transition: all 0.3s ease;
+    width: calc(100% - 16%);
 }
 
 .main-content.expanded {
-    margin-left: 64px;
+    margin-left: min(85px, 15vw); /* Match the collapsed sidebar width */
+    width: calc(100% - min(85px, 15vw));
+}
+
+/* Stats grid responsive adjustments */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 32px;
+}
+
+.main-content.expanded .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Performance grid responsive adjustments */
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 32px;
+}
+
+.main-content.expanded .performance-grid {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+/* Activity list and events table adjustments */
+.activity-list,
+.events-table {
+    max-width: 100%;
+    transition: all 0.3s ease;
 }
 
 .breadcrumb {
@@ -703,5 +738,35 @@ button {
     }
 
    
+}
+
+/* Fix for active nav item in collapsed sidebar */
+.sidebar.collapsed .nav-item.active {
+    background-color: #eef2ff;
+    color: #6366f1;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px auto;
+    padding: 0;
+}
+
+.sidebar.collapsed .nav-item {
+    margin: 8px auto;
+    padding: 10px 0;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.sidebar.collapsed .nav-icon {
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
