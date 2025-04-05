@@ -770,3 +770,6 @@ button {
     justify-content: center;
 }
 
+.nav-link {
+    text-decoration: none;
+}
