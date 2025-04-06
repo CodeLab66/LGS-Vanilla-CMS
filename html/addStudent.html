@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Student | LGS/LGC CMS Portal</title>
+    <link rel="stylesheet" href="../css/adminDashboard.css">
+    <link rel="stylesheet" href="../css/students.css">
+    <style>
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-field {
+            margin-bottom: 1rem;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-field input,
+        .form-field select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus {
+            outline: none;
+            border-color: #2196F3;
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+        }
+
+        .form-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        .required {
+            color: #dc2626;
+            margin-left: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <span class="logo-text">Navigation</span>
+                </div>
+                <button class="toggle-sidebar" id="toggleSidebar">
+                    <img src="../assets/icons/open.svg" alt="Open Menu" class="menu-icon">
+                    <img src="../assets/icons/close.svg" alt="Close Menu" class="close-icon">
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-heading">Main</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">
+                        <div class="nav-icon">
+                            <img src="../assets/icons/dashboard.svg" alt="Dashboard Icon">
+                        </div>
+                    </a>
+                    <span class="nav-text">Dashboard</span>
+                </div>
+                <div class="nav-item active">
+                    <a href="students.html" class="nav-link">
+                        <div class="nav-icon">
+                            <img src="../assets/icons/students.svg" alt="Students Icon">
+                        </div>
+                    </a>
+                    <span class="nav-text">Students</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="students.html">Students</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Add New Student</span>
+            </div>
+
+            <!-- Page Title -->
+            <h1 class="page-title">Add New Student</h1>
+
+            <!-- Add Student Form -->
+            <div class="form-container">
+                <form id="addStudentForm">
+                    <div class="form-grid">
+                        <!-- Personal Information -->
+                        <div class="form-field">
+                            <label for="studentName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="studentName" name="studentName" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="studentId">Student ID <span class="required">*</span></label>
+                            <input type="text" id="studentId" name="studentId" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="class">Class <span class="required">*</span></label>
+                            <select id="class" name="class" required>
+                                <option value="">Select Class</option>
+                                <option value="Inter Part-I">Inter Part-I</option>
+                                <option value="Inter Part-II">Inter Part-II</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="section">Section <span class="required">*</span></label>
+                            <select id="section" name="section" required>
+                                <option value="">Select Section</option>
+                                <option value="A">Section A</option>
+                                <option value="B">Section B</option>
+                                <option value="C">Section C</option>
+                                <option value="D">Section D</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="contact">Contact Number <span class="required">*</span></label>
+                            <input type="tel" id="contact" name="contact" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="window.location.href='students.html'">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Student</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="../javascript/adminDashboard.js"></script>
+    <script src="../javascript/addStudent.js"></script>
+</body>
+</html>

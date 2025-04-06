@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | LGS/LGC CMS Portal</title>
+    <link rel="stylesheet" href="../css/adminDashboard.css">
+    <link rel="stylesheet" href="../css/students.css">
+    <style>
+        .profile-container {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .attendance-filters {
+            margin: 20px 0;
+        }
+
+        .date-filter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .filter-input {
+            padding: 8px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .date-separator {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .attendance-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .attendance-status.present {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .attendance-status.absent {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .present-row {
+            background-color: #f0fdf4;
+        }
+
+        .absent-row {
+            background-color: #fef2f2;
+        }
+
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .profile-section h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .info-item label {
+            display: block;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .info-item span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .subjects-table, .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .subjects-table th, .subjects-table td,
+        .attendance-table th, .attendance-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .subjects-table th, .attendance-table th {
+            background: #f8f9fa;
+            font-weight: 500;
+        }
+
+        .grade {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .grade-a { background: #e3fcef; color: #0a6c3b; }
+        .grade-b { background: #e3f2fd; color: #0d47a1; }
+        .grade-c { background: #fff3e0; color: #e65100; }
+
+        .attendance-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 2em;
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .stat-box p {
+            color: #666;
+            margin: 0;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #e9ecef;
+        }
+
+        .edit-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .edit-button:hover {
+            background: #45a049;
+        }
+
+        .save-button {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #2196F3;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #1976D2;
+        }
+
+        .editable-field {
+            padding: 4px 8px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .editable-field.editing {
+            border-color: #e5e7eb;
+            background: white;
+        }
+
+        .edit-mode .editable-field {
+            border-color: #e5e7eb;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <span class="logo-text">Navigation</span>
+                </div>
+                <button class="toggle-sidebar" id="toggleSidebar">
+                    <img src="../assets/icons/open.svg" alt="Open Menu" class="menu-icon">
+                    <img src="../assets/icons/close.svg" alt="Close Menu" class="close-icon">
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-heading">Main</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">
+                        <div class="nav-icon">
+                            <img src="../assets/icons/dashboard.svg" alt="Dashboard Icon">
+                        </div>
+                    </a>
+                    <span class="nav-text">Dashboard</span>
+                </div>
+                <div class="nav-item active">
+                    <a href="students.html" class="nav-link">
+                        <div class="nav-icon">
+                            <img src="../assets/icons/students.svg" alt="Students Icon">
+                        </div>
+                    </a>
+                    <span class="nav-text">Students</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/teachers.svg" alt="Teachers Icon">
+                    </div>
+                    <span class="nav-text">Teachers</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/courses.svg" alt="Classes Icon">
+                    </div>
+                    <span class="nav-text">Classes</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/attendance.svg" alt="Attendance Icon">
+                    </div>
+                    <span class="nav-text">Attendance</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/results.svg" alt="Result Icon">
+                    </div>
+                    <span class="nav-text">Result</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section reports-section">
+                <div class="sidebar-heading">Reports</div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/performancereport.svg" alt="Performance Report Icon">
+                    </div>
+                    <span class="nav-text">Performance</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/attendancereport.svg" alt="Attendance Report Icon">
+                    </div>
+                    <span class="nav-text">Attendance</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section logout-section">
+                <div class="sidebar-heading">Logout</div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/logout.svg" alt="Logout Icon">
+                    </div>
+                    <span class="nav-text">Logout Account</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="students.html">Students</a>
+                <span class="breadcrumb-separator">/</span>
+                <span>Student Profile</span>
+            </div>
+
+            <div style="display: flex; align-items: center;">
+                <a href="students.html" class="back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Students
+                </a>
+                <button class="save-button" id="saveButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Save Changes
+                </button>
+            </div>
+
+            <!-- Personal Details Section -->
+            <div class="profile-container">
+                <div class="profile-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h2 style="margin: 0;">Personal Details</h2>
+                        <button class="edit-button" id="editButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                            Edit Profile
+                        </button>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Student Name</label>
+                            <span id="studentName" class="editable-field" contenteditable="false">John Doe</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Student ID</label>
+                            <span id="studentId" class="editable-field" contenteditable="false">STD2024001</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Section</label>
+                            <span id="section" class="editable-field" contenteditable="false">A</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Contact</label>
+                            <span id="contact" class="editable-field" contenteditable="false">+92 300 1234567</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subjects Enrolled Section -->
+                <div class="profile-section">
+                    <h2>Subjects Enrolled</h2>
+                    <table class="subjects-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Teacher</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subjectsTableBody">
+                            <tr>
+                                <td>MATH101</td>
+                                <td>Mathematics</td>
+                                <td>Mr. Smith</td>
+                                <td><span class="grade grade-a">A</span></td>
+                            </tr>
+                            <tr>
+                                <td>PHY101</td>
+                                <td>Physics</td>
+                                <td>Ms. Johnson</td>
+                                <td><span class="grade grade-b">B</span></td>
+                            </tr>
+                            <tr>
+                                <td>CHEM101</td>
+                                <td>Chemistry</td>
+                                <td>Dr. Brown</td>
+                                <td><span class="grade grade-c">C</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Attendance Section -->
+                <div class="profile-section">
+                    <h2>Attendance Record</h2>
+                    <div class="attendance-stats">
+                        <div class="stat-box">
+                            <h3 id="attendancePercentage">92%</h3>
+                            <p>Overall Attendance</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="totalClasses">120</h3>
+                            <p>Total Classes</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="presentDays">110</h3>
+                            <p>Present Days</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="absentDays">10</h3>
+                            <p>Absent Days</p>
+                        </div>
+                    </div>
+                    <div class="attendance-filters">
+                        <div class="date-filter">
+                            <input type="date" id="startDate" class="filter-input" placeholder="Start Date">
+                            <span class="date-separator">to</span>
+                            <input type="date" id="endDate" class="filter-input" placeholder="End Date">
+                        </div>
+                    </div>
+                    <table class="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTableBody">
+                            <tr>
+                                <td>2024-01-15</td>
+                                <td>Present</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-14</td>
+                                <td>Present</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-13</td>
+                                <td>Absent</td>
+                                <td>Medical Leave</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../javascript/adminDashboard.js"></script>
+    <script src="../javascript/singleStudentView.js"></script>
+</body>
+</html>
