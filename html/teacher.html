@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Management | LGS/LGC CMS Portal</title>
+    <link rel="stylesheet" href="../css/adminDashboard.css">
+    <link rel="stylesheet" href="../css/teacher.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <span class="logo-text">Navigation</span>
+                </div>
+                <button class="toggle-sidebar" id="toggleSidebar">
+                    <img src="../assets/icons/open.svg" alt="Open Menu" class="menu-icon">
+                    <img src="../assets/icons/close.svg" alt="Close Menu" class="close-icon">
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-heading">Main</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">
+                        <div class="nav-icon">
+                            <img src="../assets/icons/dashboard.svg" alt="Dashboard Icon">
+                        </div>
+                    </a>
+                    <span class="nav-text">Dashboard</span>
+                </div>
+                <div class="nav-item">
+                    <a href="students.html" class="nav-link">
+                        <div class="nav-icon">
+                            <img src="../assets/icons/students.svg" alt="Students Icon">
+                        </div>
+                    </a>
+                    <span class="nav-text">Students</span>
+                </div>
+                <div class="nav-item active">
+                    <a href="teacher.html" class="nav-link">
+                        <div class="nav-icon">
+                            <img src="../assets/icons/teachers.svg" alt="Teachers Icon">
+                        </div>
+                    </a>
+                    <span class="nav-text">Teachers</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/courses.svg" alt="Classes Icon">
+                    </div>
+                    <span class="nav-text">Classes</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/attendance.svg" alt="Attendance Icon">
+                    </div>
+                    <span class="nav-text">Attendance</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/results.svg" alt="Result Icon">
+                    </div>
+                    <span class="nav-text">Result</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section reports-section">
+                <div class="sidebar-heading">Reports</div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/performancereport.svg" alt="Performance Report Icon">
+                    </div>
+                    <span class="nav-text">Performance</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/attendancereport.svg" alt="Attendance Report Icon">
+                    </div>
+                    <span class="nav-text">Attendance</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section logout-section">
+                <div class="sidebar-heading">Logout</div>
+                <div class="nav-item">
+                    <div class="nav-icon">
+                        <img src="../assets/icons/logout.svg" alt="Logout Icon">
+                    </div>
+                    <span class="nav-text">Logout Account</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+        <!-- Page Title -->
+        <h1 class="page-title">Teacher Management</h1>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <!-- Total Teachers -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <span class="stat-label">Total Teachers</span>
+                </div>
+                <h2 class="stat-title">Active Teachers</h2>
+                <div class="stat-value">142</div>
+            </div>
+
+            <!-- Newly Hired Teachers -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <span class="stat-label">Newly Hired Teachers</span>
+                </div>
+                <h2 class="stat-title">Recent Hires</h2>
+                <div class="stat-value">15</div>
+            </div>
+
+            <!-- Average Rating -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <span class="stat-label">Average Rating</span>
+                </div>
+                <h2 class="stat-title">Teacher Ratings</h2>
+                <div class="stat-value">4.3</div>
+            </div>
+
+            <!-- Absent per Month -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12" y2="16"></line>
+                        </svg>
+                    </div>
+                    <span class="stat-label">Absent per Month</span>
+                </div>
+                <h2 class="stat-title">Monthly Absences</h2>
+                <div class="stat-value">3</div>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="actions-bar">
+            <div class="search-filter">
+                <input type="text" placeholder="Search by name..." class="search-input" id="nameSearch">
+                <input type="text" placeholder="Search by ID..." class="search-input" id="idSearch">
+                <select class="filter-select" id="subjectFilter">
+                    <option value="">All Subjects</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="English">English</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Computer Science">Computer Science</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Teacher List -->
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Subject</th>
+                        <th>Classes</th>
+                        <th>Students</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template id="teacher-row-template">
+                        <tr>
+                            <td class="teacher-id"></td>
+                            <td class="teacher-name"></td>
+                            <td class="teacher-subject"></td>
+                            <td class="teacher-classes"></td>
+                            <td class="teacher-students"></td>
+                            <td class="teacher-rating"></td>
+                            <td><span class="status-badge"></span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="btn-icon view-btn" title="View Profile">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </a>
+                                    <button class="btn-icon delete-btn" title="Delete">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="btn-page" disabled>&lt;</button>
+            <button class="btn-page active">1</button>
+            <button class="btn-page">2</button>
+            <button class="btn-page">3</button>
+            <button class="btn-page">&gt;</button>
+        </div>
+            </div>
+        </main>
+    </div>
+    <script src="../javascript/teacher.js"></script>
+</body>
+</html>
